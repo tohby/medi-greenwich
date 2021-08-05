@@ -26,6 +26,7 @@
     <link type="text/css" href="../../vendor/notyf/notyf.min.css" rel="stylesheet">
 
     <!-- Volt CSS -->
+    <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ asset('css/volt.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
