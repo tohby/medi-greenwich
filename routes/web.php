@@ -24,4 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->group(function () {
     Route::get('/', 'AdminController@index');
     Route::resource('doctors', 'DoctorsController');
+    Route::resource('patients', 'PatientsController');
+    Route::resource('pharmacy', 'PharmacyController');
+    Route::resource('rooms', 'RoomsController');
 });

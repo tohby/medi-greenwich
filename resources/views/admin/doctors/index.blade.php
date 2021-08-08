@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container-fluid">
-    Doctors
+    <div class="py-4">
+        Doctors
+    </div>
 </div>
 @endsection

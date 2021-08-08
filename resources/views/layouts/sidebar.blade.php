@@ -39,8 +39,8 @@
                     <span class="mt-1 ms-1 sidebar-text">MEDI - HMS</span>
                 </div>
             </li>
-            <li class="nav-item  active ">
-                <a href="../../pages/dashboard/dashboard.html" class="nav-link">
+            <li class="nav-item  {{ request()->is('admin') ? 'active' : '' }} ">
+                <a href="/admin" class="nav-link">
                     <span class="sidebar-icon">
                         <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
@@ -51,8 +51,8 @@
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="../../pages/dashboard/dashboard.html" class="nav-link">
+            <li class="nav-item {{ request()->is('admin/doctors') || request()->is('admin/doctors/*') ? 'active' : '' }}">
+                <a href="/admin/doctors" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-people-fill" viewBox="0 0 16 16">
@@ -65,8 +65,8 @@
                     <span class="sidebar-text">Doctors</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="../../pages/dashboard/dashboard.html" class="nav-link">
+            <li class="nav-item {{ request()->is('admin/patients') || request()->is('admin/patients/*') ? 'active' : '' }}">
+                <a href="/admin/patients" class="nav-link">
                     <span class="sidebar-icon">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -79,8 +79,8 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="../../pages/dashboard/dashboard.html" class="nav-link">
+            <li class="nav-item {{ request()->is('admin/pharmacy') || request()->is('admin/pharmacy/*') ? 'active' : '' }}">
+                <a href="/admin/pharmacy" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-thermometer-half" viewBox="0 0 16 16">
@@ -93,8 +93,8 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="../../pages/dashboard/dashboard.html" class="nav-link">
+            <li class="nav-item {{ request()->is('admin/rooms') || request()->is('admin/rooms/*') ? 'active' : '' }}">
+                <a href="/admin/rooms" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-door-open-fill" viewBox="0 0 16 16">
@@ -103,14 +103,6 @@
                         </svg>
                     </span>
                     <span class="sidebar-text">Rooms</span>
-                </a>
-            </li>
-
-            <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
-
-            <li class="nav-item">
-                <a href="#" class="btn btn-secondary d-flex align-items-center justify-content-center btn-upgrade-pro">
-                    <span>Medi</span>
                 </a>
             </li>
         </ul>

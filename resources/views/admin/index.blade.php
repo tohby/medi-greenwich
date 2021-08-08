@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container-fluid">
-    Medi
+    <div class="py-4">
+        Dashboard
+    </div>
 </div>
 @endsection
