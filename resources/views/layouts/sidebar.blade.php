@@ -42,16 +42,17 @@
             <li class="nav-item  {{ request()->is('admin') ? 'active' : '' }} ">
                 <a href="/admin" class="nav-link">
                     <span class="sidebar-icon">
-                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pie-chart-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z" />
                         </svg>
                     </span>
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item {{ request()->is('admin/doctors') || request()->is('admin/doctors/*') ? 'active' : '' }}">
+            <li
+                class="nav-item {{ request()->is('admin/doctors') || request()->is('admin/doctors/*') ? 'active' : '' }}">
                 <a href="/admin/doctors" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -65,7 +66,8 @@
                     <span class="sidebar-text">Doctors</span>
                 </a>
             </li>
-            <li class="nav-item {{ request()->is('admin/patients') || request()->is('admin/patients/*') ? 'active' : '' }}">
+            <li
+                class="nav-item {{ request()->is('admin/patients') || request()->is('admin/patients/*') ? 'active' : '' }}">
                 <a href="/admin/patients" class="nav-link">
                     <span class="sidebar-icon">
 
@@ -79,7 +81,8 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ request()->is('admin/pharmacy') || request()->is('admin/pharmacy/*') ? 'active' : '' }}">
+            <li
+                class="nav-item {{ request()->is('admin/pharmacy') || request()->is('admin/pharmacy/*') ? 'active' : '' }}">
                 <a href="/admin/pharmacy" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

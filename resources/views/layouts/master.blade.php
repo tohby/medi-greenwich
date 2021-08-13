@@ -38,6 +38,11 @@
         @include('layouts/navbar')
 
         <div class="main">
+            @if(session('success') || session('error') || count($errors) > 0)
+            <div class="container-fluid my-3">
+                @include('layouts/messages')
+            </div>
+            @endif
             @yield('content')
         </div>
 

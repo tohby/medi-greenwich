@@ -13,7 +13,7 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin/patients/index');
     }
 
     /**
@@ -23,7 +23,7 @@ class PatientsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/patients/create');
     }
 
     /**
@@ -34,7 +34,25 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate new patient data
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['nullable', 'numeric'],
+        ]);
+
+        // store new patient data
+
+        User::Create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            'role' => 2,
+        ]);
+
+        return redirect('admin/patients')->with('success', 'New Patient has been created');
     }
 
     /**
