@@ -24,6 +24,62 @@
                 </a>
             </div>
         </div>
+        <div class="col-12 px-0 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    @foreach ($patients as $patient)
+                    <div
+                        class="d-flex align-items-center justify-content-between {{$loop->last ? '' : 'border-bottom'}} py-3">
+                        <div>
+                            <div class="h6 mb-0 d-flex align-items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-circle me-3 text-gray-500" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                                {{$patient->name}}
+                            </div>
+                            <div class="small card-stats">
+                                {{$patient->email}}
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a href="patients/{{$patient->id}}/edit" class=" align-items-center fw-bold mr-3">
+                                Edit
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil text-gray-500 ms-1" viewBox="0 0 16 16">
+                                    <path
+                                        d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                </svg>
+                            </a>
+                            <a href="#" class=" align-items-center fw-bold text-danger ms-5" data-bs-toggle="modal"
+                                data-bs-target="#deletePatient" data-bs-whatever="{{$patient->id}}">
+                                Delete
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-trash text-danger ms-1" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    @include('admin/patients/delete')
+                    @endforeach
+                </div>
+                <div
+                    class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                    {{ $patients->links() }}
+                    <div class="fw-normal small mt-4 mt-lg-0">Showing <b>{{$patients->count()}}</b> out of
+                        <b>{{$totalCount}}</b>
+                        entries</div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
 </div>
 @endsection

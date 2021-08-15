@@ -15,7 +15,9 @@ class DoctorsController extends Controller
      */
     public function index()
     {
-        return view('admin/doctors/index');
+        $doctors = User::where('role', 1)->paginate(10);
+        $totalCount = User::where('role', 1)->count();
+        return view('admin/doctors/index')->with('doctors', $doctors)->with('totalCount', $totalCount);
     }
 
     /**
@@ -76,7 +78,9 @@ class DoctorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        //show edit page 
+        $doctor = User::find($id);
+        return view('admin/doctors/edit')->with('doctor', $doctor);
     }
 
     /**
@@ -88,7 +92,20 @@ class DoctorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate doctor data
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['nullable', 'numeric'],
+        ]);
+
+        $doctor = User::find($id);
+        $doctor->name = $request->name;
+        $doctor->email = $request->email;
+        $doctor->phone = $request->phone;
+        $doctor->save();
+
+        return redirect('/admin/doctors')->with('success', 'Account details have been updated');
     }
 
     /**
@@ -99,6 +116,9 @@ class DoctorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete user
+        $doctor = User::find($id);
+        $doctor->delete();
+        return redirect('/admin/doctors')->with('success', 'Doctor has been removed');
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PatientsController extends Controller
 {
@@ -13,7 +15,9 @@ class PatientsController extends Controller
      */
     public function index()
     {
-        return view('admin/patients/index');
+        $patients = User::where('role', 2)->paginate(10);
+        $totalCount = User::where('role', 2)->count();
+        return view('admin/patients/index')->with('patients', $patients)->with('totalCount', $totalCount);
     }
 
     /**
@@ -74,7 +78,9 @@ class PatientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        //show edit page 
+        $patient = User::find($id);
+        return view('admin/patients/edit')->with('patient', $patient);
     }
 
     /**
@@ -86,7 +92,20 @@ class PatientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate patient data
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['nullable', 'numeric'],
+        ]);
+
+        $patient = User::find($id);
+        $patient->name = $request->name;
+        $patient->email = $request->email;
+        $patient->phone = $request->phone;
+        $patient->save();
+
+        return redirect('/admin/patients')->with('success', 'Account details have been updated');
     }
 
     /**
