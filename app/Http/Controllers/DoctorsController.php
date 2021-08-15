@@ -95,7 +95,7 @@ class DoctorsController extends Controller
         // validate doctor data
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => ['nullable', 'numeric'],
         ]);
 
