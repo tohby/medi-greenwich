@@ -117,5 +117,8 @@ class PatientsController extends Controller
     public function destroy($id)
     {
         //
+        $patient = User::find($id);
+        $patient->delete();
+        return redirect('/admin/patients')->with('success', 'Patient has been removed');
     }
 }
