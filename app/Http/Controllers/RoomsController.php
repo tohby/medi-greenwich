@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Room;
 use Illuminate\Http\Request;
 
 class RoomsController extends Controller
@@ -13,7 +14,8 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        return view('admin/rooms/index');
+        $rooms = Room::paginate(10);
+        return view('admin/rooms/index')->with('rooms', $rooms);
     }
 
     /**
@@ -34,7 +36,17 @@ class RoomsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate new data
+        
+        $this->validate($request, [
+            'description' => ['required'],
+        ]);
+
+        Room::Create([
+            'description' => $request->description,
+        ]);
+
+        return redirect('admin/rooms')->with('success', 'New Room has been created');
     }
 
     /**
@@ -79,6 +91,8 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room = Room::find($id);
+        $room->delete();
+        return redirect('/admin/rooms')->with('success', 'Room has been removed');
     }
 }

@@ -22,10 +22,10 @@
                 <div class="row mb-4">
                     <div class="col-lg-8 col-sm-12">
                         <div class="mb-4">
-                            <label for="name">Description</label>
-                            <input type="text" class="form-control @error('description') is-invalid @enderror"
-                                name="name" aria-describedby="name" required>
-                            @error('name')
+                            <label for="description">Description</label>
+                            <textarea rows="3" class="form-control @error('description') is-invalid @enderror"
+                                name="description" aria-describedby="name" required></textarea>
+                            @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
