@@ -67,7 +67,8 @@ class PatientsController extends Controller
      */
     public function show($id)
     {
-        //
+        $patient = User::find($id);
+        return view('admin/patients/view')->with('patient', $patient);
     }
 
     /**

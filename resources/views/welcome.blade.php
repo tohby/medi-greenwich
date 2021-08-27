@@ -679,7 +679,6 @@
                     <div class="col-xl-5">
                         <a href="/register" class="boxed-btn3">Sign up</a>
                     </div>
-
                 </div>
             </div>
         </div>

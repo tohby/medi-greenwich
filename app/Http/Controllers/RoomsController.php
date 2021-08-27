@@ -23,7 +23,7 @@ class RoomsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/rooms/create');
     }
 
     /**
