@@ -31,8 +31,8 @@
                     <div id="selectPatient" class="collapse multi-collapse show">
                         <div class="col-lg-6 col-sm-12">
                             <div class="mb-4">
-                                <label for="name">Select patient</label>
-                                <select class="form-select" aria-label="Default select patient">
+                                <label for="patient">Select patient</label>
+                                <select class="form-select" aria-label="Default select patient" name="patient">
                                     <option value="" selected>Select Patient</option>
                                     @foreach ($patients as $patient)
                                     <option value="{{$patient->id}}">{{$patient->name}}</option>
@@ -50,10 +50,12 @@
                     <div class="row">
                         <div class="col-lg-4 col-sm-12">
                             <div class="mb-4">
-                                <label for="name">Date</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                    aria-describedby="name" required>
-                                @error('name')
+                                <label for="date">Date</label>
+                                <div class="input-group date" id="datetimepicker">
+                                    <input data-datepicker="" class="form-control @error('date') is-invalid @enderror"
+                                        id="birthday" type="date" name="date" placeholder="dd/mm/yyyy" required>
+                                </div>
+                                @error('date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -63,9 +65,9 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="mb-4">
                                 <label for="name">Time</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                <input type="time" class="form-control @error('time') is-invalid @enderror" name="time"
                                     aria-describedby="name" required>
-                                @error('name')
+                                @error('time')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

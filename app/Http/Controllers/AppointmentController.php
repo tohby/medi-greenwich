@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AppointmentController extends Controller
 {
@@ -37,7 +38,37 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $this->validate($request, [
+            'patient' => ['required_without_all:name,email,password'],
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'phone' => ['nullable', 'numeric'],
+        ]);
+
+        $doctor = User::where('role', 1)->first();
+
+        if($request->patient){
+            $patient = $request->patient;
+        }else{
+            $newPatient = User::Create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password),
+                'role' => 2,
+            ]);
+            $patient = $newPatient->id;
+        }
+
+        Appointment::Create([
+            'doctorId' => $doctor->id,
+            'patientId' => $patient,
+            'date' => $request->date,
+            'time' => $request->time,
+        ]);
+
+        return redirect('admin/appointments')->with('success', 'Appointment has been created');
     }
 
     /**
