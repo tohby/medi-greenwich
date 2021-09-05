@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pharmacy;
 use Illuminate\Http\Request;
 
 class PharmacyController extends Controller
@@ -13,7 +14,8 @@ class PharmacyController extends Controller
      */
     public function index()
     {
-        return view('admin/pharmacy/index');
+        $drugs = Pharmacy::orderBy('created_at', 'desc')->paginate(12);
+        return view('admin/pharmacy/index')->with('drugs', $drugs);
     }
 
     /**
@@ -23,7 +25,7 @@ class PharmacyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/pharmacy/create');
     }
 
     /**
@@ -34,51 +36,75 @@ class PharmacyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required', 'numeric'],
+        ]);
+
+        Pharmacy::Create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+        ]);
+
+        return redirect('admin/pharmacy')->with('success', 'Drug added to Pharmacy successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pharmacy $pharmacy)
     {
-        //
+        return view('admin/pharmacy/view')->with('drug', $pharmacy);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pharmacy $pharmacy)
     {
-        //
+        return view('admin/pharmacy/edit')->with('drug', $pharmacy);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pharmacy $pharmacy)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required'],
+            'description' => ['required'],
+            'price' => ['required', 'numeric'],
+        ]);
+
+        $pharmacy->name = $request->name;
+        $pharmacy->description = $request->description;
+        $pharmacy->price = $request->price;
+        $pharmacy->save();
+
+        return redirect('admin/pharmacy')->with('success', 'Drug updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Pharmacy  $pharmacy
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pharmacy $pharmacy)
     {
-        //
+        $pharmacy->destroy();
+        return view('admin/pharmacy')->with('success', 'Drug, removed successfully');
     }
 }

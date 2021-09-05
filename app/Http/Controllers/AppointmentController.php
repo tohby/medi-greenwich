@@ -6,6 +6,7 @@ use App\User;
 use App\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -16,7 +17,15 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('admin/appointments/index');
+        if(Auth::user()->role === 0){
+            $appointments = Appointment::orderBy('created_at', 'desc')->paginate(10);
+        }elseif(Auth::user()->role === 1){
+            $appointments = Appointment::where('doctorId', Auth::id())->orderBy('created_at', 'desc')->paginate(10);
+        }else{
+            $appointments = Appointment::where('patientId', Auth::id())->orderBy('created_at', 'desc')->paginate(10);
+        }
+
+        return view('admin/appointments/index')->with('appointments', $appointments);
     }
 
     /**
