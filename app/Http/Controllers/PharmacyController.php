@@ -104,7 +104,8 @@ class PharmacyController extends Controller
      */
     public function destroy(Pharmacy $pharmacy)
     {
-        $pharmacy->destroy();
-        return view('admin/pharmacy')->with('success', 'Drug, removed successfully');
+        
+        $pharmacy->delete();
+        return redirect('admin/pharmacy')->with('success', 'Drug, removed successfully');
     }
 }
