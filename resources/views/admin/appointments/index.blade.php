@@ -35,16 +35,30 @@
             <table class="table table-centered table-nowrap mb-0 rounded">
                 <thead class="thead-light">
                     <tr>
-                        <th class="border-0 rounded-start">Room ID</th>
+                        <th class="border-0 rounded-start">Appointment ID</th>
+                        @unless (Auth::user()->role === 1)
+                        <th class="border-0">Doctor</th>
+                        @endunless
+                        @unless (Auth::user()->role === 2)
+                        <th class="border-0">Patient</th>
+                        @endunless
                         <th class="border-0">Description</th>
                         <th class="border-0">Status</th>
+                        <th class="border-0">Date</th>
+                        <th class="border-0">Time</th>
                         <th class="border-0">#</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($appointments as $appointment)
                     <tr>
-                        <td class="border-0 fw-bold">Room #{{$appointment->id}}</td>
+                        <td class="border-0 fw-bold">Appointment #{{$appointment->id}}</td>
+                        @unless (Auth::user()->role === 1)
+                        <td class="border-0 fw-bold">{{$appointment->doctor->name}}</td>
+                        @endunless
+                        @unless (Auth::user()->role === 2)
+                        <td class="border-0 fw-bold">{{$appointment->patient->name}}</td>
+                        @endunless
                         <td class="border-0 fw-bold">{{$appointment->description}}</td>
                         <td class="border-0 {{$appointment->status === 1 ? 'text-danger' : 'text-primary'}}">
                             <div class="d-flex align-items-center"><svg class="icon icon-xs me-1" fill="currentColor"
@@ -53,10 +67,13 @@
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                         clip-rule="evenodd"></path>
                                 </svg> <span
-                                    class="fw-bold">{{$appointment->status === 1 ? 'tOccupied' : 'Available'}}</span>
+                                    class="fw-bold">{{$appointment->status === 1 ? 'Occupied' : 'Upcoming'}}</span>
                             </div>
                         </td>
-                        <td class="border-0 fw-bold text-danger">
+                        <td class="border-0 fw-bold">
+                            {{\Carbon\Carbon::parse($appointment->date)->toFormattedDateString()}}</td>
+                        <td class="border-0 fw-bold">{{$appointment->time}}</td>
+                        <td class="border-0 fw-bold text-daCarbon::parse($date)nger">
                             <form method="POST" action="{{ route('appointments.destroy',$appointment->id) }}">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}

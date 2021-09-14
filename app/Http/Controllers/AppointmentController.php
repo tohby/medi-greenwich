@@ -36,7 +36,8 @@ class AppointmentController extends Controller
     public function create()
     {
         $patients = User::where('role', 2)->get();
-        return view('admin/appointments/create')->with('patients', $patients);
+        $doctors = User::where('role', 1)->get();
+        return view('admin/appointments/create')->with('patients', $patients)->with('doctors', $doctors);
     }
 
     /**
@@ -53,9 +54,8 @@ class AppointmentController extends Controller
             'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'phone' => ['nullable', 'numeric'],
+            'doctor' => ['required'],
         ]);
-
-        $doctor = User::where('role', 1)->first();
 
         if($request->patient){
             $patient = $request->patient;
@@ -71,7 +71,7 @@ class AppointmentController extends Controller
         }
 
         Appointment::Create([
-            'doctorId' => $doctor->id,
+            'doctorId' => $request->doctor,
             'patientId' => $patient,
             'date' => $request->date,
             'time' => $request->time,

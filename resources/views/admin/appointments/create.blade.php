@@ -20,8 +20,9 @@
             <form action="{{action("AppointmentController@store")}}" method="post">
                 @csrf
                 <div class="row mb-4">
+                    @unless (Auth::user()->role === 2)
                     <div class="col-lg-8 col-sm-8 mb-2">
-                        <a href="#" class="btn btn-link" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+                        <a href="#" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target=".multi-collapse"
                             aria-expanded="false" aria-controls="create-new-patient selectPatient">Create New
                             Patient</a>
                     </div>
@@ -29,10 +30,9 @@
                         @include('admin/appointments/newPatientForm')
                     </div>
                     <div id="selectPatient" class="collapse multi-collapse show">
-                        <div class="col-lg-6 col-sm-12">
+                        <div class="col-lg-12 col-sm-12">
                             <div class="mb-4">
-                                <label for="patient">Select patient</label>
-                                <select class="form-select" aria-label="Default select patient" name="patient">
+                                <select class="selectpicker form-select" data-live-search="true" name="patient">
                                     <option value="" selected>Select Patient</option>
                                     @foreach ($patients as $patient)
                                     <option value="{{$patient->id}}">{{$patient->name}}</option>
@@ -47,6 +47,28 @@
                             </div>
                         </div>
                     </div>
+                    @endunless
+
+                    @unless (Auth::user()->role === 1)
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="mb-4">
+                            <select class="selectpicker form-select" data-live-search="true" name="doctor">
+                                <option value="" selected>Select Doctor</option>
+                                @foreach ($doctors as $doctor)
+                                <option value="{{$doctor->id}}">{{$doctor->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    @endunless
+
+                    @if (Auth::user()->role === 2)
+                    <input type="hidden" name="patient" value="{{Auth::id()}}">
+                    @endif
+                    @if (Auth::user()->role === 1)
+                    <input type="hidden" name="doctor" value="{{Auth::id()}}">
+                    @endif
+
                     <div class="row">
                         <div class="col-lg-4 col-sm-12">
                             <div class="mb-4">

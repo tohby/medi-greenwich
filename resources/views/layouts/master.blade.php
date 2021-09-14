@@ -10,10 +10,7 @@
     <!-- Volt CSS -->
     <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link type="text/css" href="{{ asset('css/volt.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link type="text/css" href="{{ asset('css/bootstrap-select.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -62,5 +59,11 @@
         </footer>
     </main>
 </body>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/bootstrap-select.js') }}"></script>
 
 </html>
