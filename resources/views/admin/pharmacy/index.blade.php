@@ -41,7 +41,7 @@
                         <form method="POST" action="{{ route('pharmacy.destroy',$drug->id) }}">
                             {{ csrf_field() }}
                             {{ method_field('delete') }}
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </div>
                 </div>

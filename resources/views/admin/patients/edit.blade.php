@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="py-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="py-1">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-1">
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -52,6 +52,47 @@
                         </div>
                         @error('phone')
                         <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="mb-4">
+                            <label for="phone">DOB</label>
+                            <div class="input-group date" id="datetimepicker">
+                                <input data-datepicker="" class="form-control @error('dob') is-invalid @enderror"
+                                    id="dob" type="date" name="dob" placeholder="dd/mm/yyyy"
+                                    value="{{$patient->info ? $patient->info->dob : '' }}" required>
+                            </div>
+                        </div>
+                        @error('dob')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="mb-4">
+                            <label for="phone">Height</label>
+                            <input type="number" class="form-control @error('height') is-invalid @enderror"
+                                name="height" aria-describedby="phone"
+                                value="{{$patient->info ? $patient->info->height : '' }}" required>
+                        </div>
+                        @error('height')
+                        <span class=" invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="mb-4">
+                            <label for="phone">Weight</label>
+                            <input type="number" class="form-control @error('weight') is-invalid @enderror"
+                                name="weight" aria-describedby="phone"
+                                value="{{$patient->info ? $patient->info->weight : '' }}" required>
+                        </div>
+                        @error('weight')
+                        <span class=" invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror

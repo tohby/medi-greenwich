@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the record associated with the user.
+     */
+    public function info()
+    {
+        return $this->hasOne(PatientInfo::class, 'patientId');
+    }
 }

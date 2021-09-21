@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\PatientInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -98,6 +99,9 @@ class PatientsController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => ['nullable', 'numeric'],
+            'dob' => ['required', 'date'],
+            'weight' => ['required'],
+            'height' => ['required'],
         ]);
 
         $patient = User::find($id);
@@ -105,6 +109,15 @@ class PatientsController extends Controller
         $patient->email = $request->email;
         $patient->phone = $request->phone;
         $patient->save();
+
+        $patientInfo = PatientInfo::firstOrCreate(
+            ['patientId' => $patient->id],
+            [
+                'dob' => $request->dob, 
+                'height' => $request->height,
+                'weight' => $request->weight,
+            ]
+        );
 
         return redirect('/admin/patients')->with('success', 'Account details have been updated');
     }

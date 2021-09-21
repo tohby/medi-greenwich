@@ -122,6 +122,8 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->status = 3;
+        $appointment->save();
+        return redirect('admin/appointments')->with('success', 'Appointment has been cancelled');
     }
 }
