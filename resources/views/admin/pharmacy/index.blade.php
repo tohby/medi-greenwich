@@ -29,27 +29,26 @@
         @foreach ($drugs as $drug)
         <div class="col-lg-5 col-xl-3 mb-4">
             <div class="card border-0 shadow">
-                <div class="card-body d-flex">
-                    <div class="row">
-                        <div class="col-lg-12 col-xl-5"><strong class="h4">{{$drug->name}}</strong> - <h6
-                                class="text-muted float-right">
-                                {{$drug->price}}
-                                USD</h6>
-                        </div>
-                        <div class="col-lg-12 col-xl-7">
-                            <div class="d-flex justify-content-between">
-                                <a href="pharmacy/{{$drug->id}}/edit"
-                                    class="btn btn-primary btn-sm mb-2 me-2">&nbsp;Edit&nbsp;</a>
-                                <a href="pharmacy/{{$drug->id}}"
-                                    class="btn btn-primary btn-sm mb-2 me-2">&nbsp;View&nbsp;</a>
-                                <form method="POST" action="{{ route('pharmacy.destroy',$drug->id) }}">
-                                    {{ csrf_field() }}
-                                    {{ method_field('delete') }}
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
-                            </div>
-                        </div>
+                <div class="card-body">
+
+                    <div class="col-lg-5"><strong class="h4">{{$drug->name}}</strong> - <h6
+                            class="text-muted float-right">
+                            {{$drug->price}}
+                            USD</h6>
                     </div>
+                    <div class="col-lg-7">
+
+                        <a href="pharmacy/{{$drug->id}}/edit"
+                            class="btn btn-primary btn-sm mb-2 me-2">&nbsp;Edit&nbsp;</a>
+                        <a href="pharmacy/{{$drug->id}}" class="btn btn-primary btn-sm mb-2 me-2">&nbsp;View&nbsp;</a>
+                        <form method="POST" action="{{ route('pharmacy.destroy',$drug->id) }}">
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+
+                    </div>
+
                 </div>
             </div>
         </div>
