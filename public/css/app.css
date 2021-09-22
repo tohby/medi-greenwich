@@ -11722,3 +11722,15 @@ fieldset:disabled .btn {
   background-color: #0145b9;
 }
 
+.status-0 {
+  color: #3490dc;
+}
+
+.status-1 {
+  color: #38c172;
+}
+
+.status-2 {
+  color: #e3342f;
+}
+

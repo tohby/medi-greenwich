@@ -99,7 +99,7 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        return view('admin/appointments/examination')->with('appointment', $appointment);
     }
 
     /**
@@ -111,7 +111,16 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        //
+         $this->validate($request, [
+            'notes' => ['required'],
+            'price' => ['nullable', 'string']
+        ]);
+
+        $appointment->notes = $request->notes;
+        $appointment->price = $request->price;
+        $appointment->status = 1;
+        $appointment->save();
+        return redirect('admin/appointments')->with('success', 'Examination has been submited');
     }
 
     /**

@@ -46,28 +46,12 @@
                         <th class="border-0">Status</th>
                         <th class="border-0">Date</th>
                         <th class="border-0">Time</th>
-                        <th class="border-0">#</th>
+                        <th class="border-0 d-flex justify-content-end">#</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($appointments as $appointment)
-                    @switch($appointment->status)
-                    @case(0)
-                    {{$className = 'text-primary'}}
-                    {{$status = 'Upcoming'}}
-                    @break
-                    @case(1)
-                    {{$className = 'text-success'}}
-                    {{$status = 'Completed'}}
-                    @break
-                    @case(2)
-                    {{$className = 'text-danger'}}
-                    {{$status = 'Cancelled'}}
-                    @break
-                    @default
-                    {{$className = 'text-primary'}}
-                    {{$status = 'Upcoming'}}
-                    @endswitch
+
                     <tr>
                         <td class="border-0 fw-bold">Appointment #{{$appointment->id}}</td>
                         @unless (Auth::user()->role === 1)
@@ -77,19 +61,33 @@
                         <td class="border-0 fw-bold">{{$appointment->patient->name}}</td>
                         @endunless
                         <td class="border-0 fw-bold">{{$appointment->description}}</td>
-                        <td class="border-0 {{$className}}">
-                            <div class="d-flex align-items-center"><svg class="icon icon-xs me-1" fill="currentColor"
-                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <td class="border-0">
+                            <div class="d-flex align-items-center status-{{$appointment->status}}"><svg
+                                    class="icon icon-xs me-1" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                         clip-rule="evenodd"></path>
-                                </svg> <span class="fw-bold">{{$status}}</span>
+                                </svg> <span class="fw-bold">
+                                    @if ($appointment->status === 0)
+                                    Upcoming
+                                    @elseif ($appointment->status === 1)
+                                    Completed
+                                    @else
+                                    Cancelled
+                                    @endif
+                                </span>
                             </div>
                         </td>
                         <td class="border-0 fw-bold">
                             {{\Carbon\Carbon::parse($appointment->date)->toFormattedDateString()}}</td>
                         <td class="border-0 fw-bold">{{$appointment->time}}</td>
-                        <td class="border-0 fw-bold text-daCarbon::parse($date)nger">
+
+                        <td class="border-0 fw-bold d-flex justify-content-end">
+                            @if (Auth::user()->role === 1 && $appointment->status === 0)
+                            <a href="/admin/appointments/{{$appointment->id}}/edit"
+                                class="btn btn-primary me-2">Examine</a>
+                            @endif
                             @unless ($appointment->status === 2)
                             <form method="POST" action="{{ route('appointments.destroy',$appointment->id) }}">
                                 {{ csrf_field() }}

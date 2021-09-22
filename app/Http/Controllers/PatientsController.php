@@ -45,17 +45,28 @@ class PatientsController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['nullable', 'numeric'],
+            'dob' => ['required', 'date'],
+            'weight' => ['required'],
+            'height' => ['required'],
         ]);
 
         // store new patient data
 
-        User::Create([
+        $patient = User::Create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'role' => 2,
         ]);
+        $patientInfo = PatientInfo::firstOrCreate(
+            ['patientId' => $patient->id],
+            [
+                'dob' => $request->dob, 
+                'height' => $request->height,
+                'weight' => $request->weight,
+            ]
+        );
 
         return redirect('admin/patients')->with('success', 'New Patient has been created');
     }
