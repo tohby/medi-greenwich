@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,5 +44,16 @@ class User extends Authenticatable
     public function info()
     {
         return $this->hasOne(PatientInfo::class, 'patientId');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        return $array;
     }
 }

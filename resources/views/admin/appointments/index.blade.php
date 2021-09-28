@@ -84,6 +84,7 @@
                         <td class="border-0 fw-bold">{{$appointment->time}}</td>
 
                         <td class="border-0 fw-bold d-flex justify-content-end">
+                            <a href="/admin/appointments/{{$appointment->id}}" class="btn btn-primary me-2">View</a>
                             @if (Auth::user()->role === 1 && $appointment->status === 0)
                             <a href="/admin/appointments/{{$appointment->id}}/edit"
                                 class="btn btn-primary me-2">Examine</a>

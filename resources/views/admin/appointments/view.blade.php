@@ -15,8 +15,8 @@
                 <h2 class="h4">Examination</h2>
             </div>
             <div class="btn-toolbar mb-2 mb-md-0">
-                <a href="/admin/patients/{{$appointment->patient->id}}" class=" btn btn-sm btn-gray-800 d-inline-flex
-                    align-items-center">
+                <a href="/admin/patients/{{$appointment->patient->id}}"
+                    class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
                     <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -32,30 +32,46 @@
                 @csrf
                 <div class="row mb-4">
                     <div class="row">
+                        <div class="col-lg-8 col-sm-6">
+                            <div class="mb-4">
+                                <label for="notes">Date</label>
+                                <p>{{$appointment->date}}</p>
+                                <p>{{$appointment->time}}</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="mb-4">
+                                <label for="notes">Status</label>
+                                <p class="font-weight-bold status-{{$appointment->status}}">@if ($appointment->status
+                                    === 0)
+                                    Upcoming
+                                    @elseif($appointment->status === 1)
+                                    Completed
+                                    @elseif($appointment->status === 2)
+                                    Cancelled
+                                    @endif</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-sm-12">
+                            <div class="mb-4">
+                                <label for="notes">Patient</label>
+                                <p>{{$appointment->patient->name}}</p>
+
+                            </div>
+                        </div>
                         <div class="col-lg-8 col-sm-12">
                             <div class="mb-4">
                                 <label for="notes">Notes</label>
-                                <div class="input-group">
-                                    <textarea class="form-control @error('notes') is-invalid @enderror" type="te"
-                                        name="notes" placeholder="Notes" required rows='5'></textarea>
-                                </div>
-                                @error('date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <p>{{$appointment->notes}}</p>
+
                             </div>
                         </div>
                         <div class="col-lg-8 col-sm-12">
                             <div class="mb-4">
                                 <label for="price">Price</label>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
-                                    name="price" aria-describedby="name" required>
-                                @error('price')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <p>{{$appointment->price}} USD</p>
                             </div>
                         </div>
                     </div>
