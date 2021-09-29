@@ -23,6 +23,6 @@ class SearchController extends Controller
             'searchKey' => 'required',
         ]);
         $appointments = Appointment::search($request->searchKey)->paginate(10);
-        return view('admin/appointments/index')->with('appointments', $appointments);
+        return view('admin/appointments/index')->with('appointments', $appointments)->with('searchKey', $request->searchKey);
     }
 }
