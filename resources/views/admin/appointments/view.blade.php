@@ -28,59 +28,59 @@
         </div>
 
         <div class="card card-body border-0 shadow table-wrapper table-responsive">
-            <form action="{{action("AppointmentController@update", "$appointment->id")}}" method="post">
-                @csrf
-                <div class="row mb-4">
-                    <div class="row">
-                        <div class="col-lg-8 col-sm-6">
-                            <div class="mb-4">
-                                <label for="notes">Date</label>
-                                <p>{{$appointment->date}}</p>
-                                <p>{{$appointment->time}}</p>
 
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="mb-4">
-                                <label for="notes">Status</label>
-                                <p class="font-weight-bold status-{{$appointment->status}}">@if ($appointment->status
-                                    === 0)
-                                    Upcoming
-                                    @elseif($appointment->status === 1)
-                                    Completed
-                                    @elseif($appointment->status === 2)
-                                    Cancelled
-                                    @endif</p>
+            <div class="row mb-4">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-6">
+                        <div class="mb-4">
+                            <label for="notes">Date</label>
+                            <p>{{$appointment->date}}</p>
+                            <p>{{$appointment->time}}</p>
 
-                            </div>
                         </div>
-                        <div class="col-lg-8 col-sm-12">
-                            <div class="mb-4">
-                                <label for="notes">Patient</label>
-                                <p>{{$appointment->patient->name}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="mb-4">
+                            <label for="notes">Status</label>
+                            <p class="font-weight-bold status-{{$appointment->status}}">@if ($appointment->status
+                                === 0)
+                                Upcoming
+                                @elseif($appointment->status === 1)
+                                Completed
+                                @elseif($appointment->status === 2)
+                                Cancelled
+                                @endif</p>
 
-                            </div>
                         </div>
-                        <div class="col-lg-8 col-sm-12">
-                            <div class="mb-4">
-                                <label for="notes">Notes</label>
-                                <p>{{$appointment->notes}}</p>
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="mb-4">
+                            <label for="notes">Patient</label>
+                            <p>{{$appointment->patient->name}}</p>
 
-                            </div>
                         </div>
-                        <div class="col-lg-8 col-sm-12">
-                            <div class="mb-4">
-                                <label for="price">Price</label>
-                                <p>{{$appointment->price}} USD</p>
-                            </div>
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="mb-4">
+                            <label for="notes">Notes</label>
+                            <p>{{$appointment->notes}}</p>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="mb-4">
+                            <label for="price">Price</label>
+                            <p>{{$appointment->price}} USD</p>
                         </div>
                     </div>
                 </div>
-                <div class="float-end">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-                @method('PUT')
-            </form>
+            </div>
+            @if (Auth::user()->role === 2 && $appointment->price != null)
+
+            <a href="#" class="btn btn-primary">Pay</a>
+
+            @endif
+
         </div>
     </div>
 </div>
