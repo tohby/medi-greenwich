@@ -40,7 +40,7 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </span>
-                        <input type="text" class="form-control" name="searchKey" placeholder="Search patients"
+                        <input type="text" class="form-control" name="searchKey" placeholder="Search drugs"
                             value="{{$searchKey}}" required>
                     </div>
                 </form>
