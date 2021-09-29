@@ -17,7 +17,8 @@ class DoctorsController extends Controller
     {
         $doctors = User::where('role', 1)->paginate(10);
         $totalCount = User::where('role', 1)->count();
-        return view('admin/doctors/index')->with('doctors', $doctors)->with('totalCount', $totalCount);
+        $searchKey = '';
+        return view('admin/doctors/index')->with('doctors', $doctors)->with('totalCount', $totalCount)->with('searchKey', $searchKey);
     }
 
     /**

@@ -15,7 +15,8 @@ class PharmacyController extends Controller
     public function index()
     {
         $drugs = Pharmacy::orderBy('created_at', 'desc')->paginate(12);
-        return view('admin/pharmacy/index')->with('drugs', $drugs);
+        $searchKey = '';
+        return view('admin/pharmacy/index')->with('drugs', $drugs)->with('searchKey', $searchKey);
     }
 
     /**

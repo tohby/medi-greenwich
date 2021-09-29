@@ -30,5 +30,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('appointments', 'AppointmentController');
     Route::post('patients/search', 'SearchController@patients');
     Route::post('appointments/search', 'SearchController@appointments');
+    Route::post('pharmacy/search', 'SearchController@pharmacy');
+    Route::post('doctors/search', 'SearchController@doctors');
 });
 
