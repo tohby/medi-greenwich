@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -24,5 +16,14 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function pay($id) {
+        $appointment = Appointment::find($id);
+        return view('admin/appointments/payment')->with('appointment', $appointment);
+    }
+
+    public function checkout() {
+        
     }
 }

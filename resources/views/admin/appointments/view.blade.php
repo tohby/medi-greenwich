@@ -77,7 +77,7 @@
             </div>
             @if (Auth::user()->role === 2 && $appointment->price != null)
 
-            <a href="#" class="btn btn-primary">Pay</a>
+            <a href="/{{$appointment->id}}/pay" class="btn btn-primary" target="_blank">Pay</a>
 
             @endif
 
