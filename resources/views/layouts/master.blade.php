@@ -3,6 +3,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com/v3/ ">
     <!-- Primary Meta Tags -->
     <title>Medi - Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
