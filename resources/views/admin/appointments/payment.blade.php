@@ -82,7 +82,7 @@
                         <div id="card-element">
                             <!-- A Stripe Element will be inserted here. -->
                         </div>
-                        <input type="hidden" name="productId" value="{{$appointment->id}}">
+                        <input type="hidden" name="appointmentId" value="{{$appointment->id}}">
                         <!-- Used to display form errors. -->
                         <div id="card-errors" role="alert"></div>
                     </div>
@@ -103,7 +103,7 @@
     <script>
         (function() {
             // Create a Stripe client.
-            var stripe = Stripe('pk_test_8TVb9qyFYpvDlyq4jFeI3BJY00gJkOeCO1');
+            var stripe = Stripe('pk_test_51Jer1GE4Pp7fIVq8hKcFUbOSMHopQofppEtN7TD3KmpiYZ0UrpRBbov5iFC3RZVb6iAq4Qq77aOcoTUB0nOs2TjV00e9Uz59w6');
             
             // Create an instance of Elements.
             var elements = stripe.elements();
