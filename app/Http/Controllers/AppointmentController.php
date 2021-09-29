@@ -24,8 +24,8 @@ class AppointmentController extends Controller
         }else{
             $appointments = Appointment::where('patientId', Auth::id())->orderBy('created_at', 'desc')->paginate(10);
         }
-
-        return view('admin/appointments/index')->with('appointments', $appointments);
+        $searchKey = '';
+        return view('admin/appointments/index')->with('appointments', $appointments)->with('searchKey', $searchKey);
     }
 
     /**

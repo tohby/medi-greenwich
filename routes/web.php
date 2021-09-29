@@ -28,4 +28,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('pharmacy', 'PharmacyController');
     Route::resource('rooms', 'RoomsController');
     Route::resource('appointments', 'AppointmentController');
+    Route::post('patients/search', 'SearchController@patients');
+    Route::post('appointments/search', 'SearchController@appointments');
 });
+

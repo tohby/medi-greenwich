@@ -18,7 +18,8 @@ class PatientsController extends Controller
     {
         $patients = User::where('role', 2)->paginate(10);
         $totalCount = User::where('role', 2)->count();
-        return view('admin/patients/index')->with('patients', $patients)->with('totalCount', $totalCount);
+        $searchKey = '';
+        return view('admin/patients/index')->with('patients', $patients)->with('totalCount', $totalCount)->with('searchKey', $searchKey);
     }
 
     /**
