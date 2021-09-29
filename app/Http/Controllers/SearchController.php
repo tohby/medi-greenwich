@@ -41,6 +41,6 @@ class SearchController extends Controller
             'searchKey' => 'required',
         ]);
         $drugs = Pharmacy::search($request->searchKey)->paginate(10);
-        return view('admin/pharmacy/index')->with('drugs', $drugs)->with('searchKey', $searchKey);
+        return view('admin/pharmacy/index')->with('drugs', $drugs)->with('searchKey', $request->searchKey);
     }
 }
