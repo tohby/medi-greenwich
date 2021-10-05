@@ -42,7 +42,7 @@ class PatientsController extends Controller
     {
         // validate new patient data
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^([^0-9]*)$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['nullable', 'numeric'],

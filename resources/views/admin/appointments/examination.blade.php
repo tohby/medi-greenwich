@@ -49,7 +49,7 @@
                         <div class="col-lg-8 col-sm-12">
                             <div class="mb-4">
                                 <label for="price">Price</label>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                <input type="number" min="1" class="form-control @error('price') is-invalid @enderror"
                                     name="price" aria-describedby="name" required>
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">

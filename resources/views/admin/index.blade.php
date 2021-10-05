@@ -25,5 +25,12 @@
             </div>
         </div>
     </div>
+    <div id="dashboard">
+        @include('admin/dashboard/admin')
+        {{-- @if (Auth::user()->role === 0)
+        @else
+        'not admin'
+        @endif --}}
+    </div>
 </div>
 @endsection
